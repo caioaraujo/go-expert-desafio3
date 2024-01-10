@@ -47,8 +47,7 @@ func main() {
 
 	wserver := webserver.NewWebServer(configs.WebServerPort)
 	webOrderHandler := NewWebOrderHandler(db, eventDispatcher)
-	wserver.AddHandler("/order", webOrderHandler.Create)
-	wserver.AddHandler("/order", webOrderHandler.List)
+	wserver.AddHandler("/order", webOrderHandler.Handle)
 	fmt.Println("Starting web server on port", configs.WebServerPort)
 	go wserver.Start()
 
