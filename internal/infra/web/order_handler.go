@@ -26,6 +26,17 @@ func NewWebOrderHandler(
 	}
 }
 
+func (h *WebOrderHandler) Handle(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		h.List(w, r)
+	case "POST":
+		h.Create(w, r)
+	default:
+		panic("Method not allowed!")
+	}
+}
+
 func (h *WebOrderHandler) Create(w http.ResponseWriter, r *http.Request) {
 	var dto usecase.OrderInputDTO
 	err := json.NewDecoder(r.Body).Decode(&dto)
